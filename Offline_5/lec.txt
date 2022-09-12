@@ -1,0 +1,53 @@
+OFFLINE:5
+----------
+
+Graph:
+-------
+G=(V,E)
+- V = set of vertices/nodes
+- E = set of edges
+
+Representation:
+---------------
+- Adjacency Matrix
+    
+- Adjacency List
+
+Solution - Search
+------------------
+Uninformed search:
+-------------------
+    Uniform-cost search
+
+Informed Search:
+----------------
+    Greedy Best-first search
+    
+
+A* Search:
+----------
+
+input:
+------
+6 5 #nodes edges
+1 2 4
+3 4 10
+1 4 3
+2 5 11
+4 5 12
+8 7 5 3 10 1 #heuristic value
+
+
+priority queue is must - minheap (lgn)
+
+
+/*For UCS=
+6 8 6
+1 2 4
+1 5 3
+2 3 2
+2 4 4
+3 6 3
+3 4 1
+5 6 6 
+4 6 1*/

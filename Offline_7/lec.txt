@@ -1,0 +1,355 @@
+  K-means clustering      |
+KNN                     |
+A* search               |
+Local search            |
+-------------------------
+
+Learning algorithm:
+- supervised (KNN)
+    - dataset output label/tag/class define
+
+    2 category:
+    - Classification: output label discrete
+        KNN classification - majority vote
+    - Regression: output label continuous value
+        KNN regression - average value
+
+- unsupervised (clustering)
+    - dataset output level doesn't exists
+
+- semi-supervised
+    - portion labeled
+    - other portion unlabeled
+
+- reinforcement
+- active
+...
+...
+
+Regression - dependent variable (continuous) predict with the help of independent variable
+
+For example:
+salary = 1*education+0.5*experience
+             5             2
+
+- Simple linear regression
+- Multiple linear regression
+- Multivariate linear regression
+
+- Polynomial regression (x)
+
+Classification:
+----------------
+- Logistic regression
+
+----------------------------------------
+
+Linear equation
+- our predicted function will be linear.
+
+y = w0.1 + w1 x1 + w2 x2+ w3 x3+ w4 x4 + ... ...+wn xn
+
+equation: y = w0
+equation: y = w0 + w1 x1
+equation: y = w0 + w1 x1 + w2 x2
+
+
+Simple Linear Regression:
+--------------------------
+training dataset (input) - (x, y)
+
+Target:
+To predict the values of w0 and w1 in the linear equation,
+y = w0*1 + w1*x = 0.5 + 0.99 * x
+
+test dataset: (x, ?)
+
+Training phase: learn the values of w0 and w1.
+
+------------------------------------------
+Proof:
+-------
+training phase: (x1, y1), (x2, y2), ... (xn, yn)
+
+Sum Squared Error, SSE = Σ (y-predicted)^2
+
+Target: SSE minimize = Least Square Error
+
+way 1: gradient descent Local search
+way 2: mathematical formula (use)
+
+SSE = Σ (ry-predicted)^2
+    =  Σ (ry- (w0+w1 x) )^2
+
+d(SSE)
+------ = Σ 2 (ry - (w0 + w1 x))  (-1) = 0
+d w0
+
+d(SSE)
+------ = Σ 2 (ry - (w0 + w1 x)) (-x) = 0
+d w1
+
+
+final formulation:
+-------------------
+          Sy
+w1 = r * -----
+          Sx
+
+            Σ (y - average_y)^2
+Sy = sqrt( -----------------------------)
+                    n-1
+
+            Σ (x - average_x)^2
+Sx = sqrt( -----------------------------)
+                    n-1
+
+
+     Σ (x-average_x)*(y-average_y)
+r = ---------------------------------------------------
+    sqrt(  [ Σ (x-average_x)^2 ] * [ Σ (y-average_y)^2 ] )
+
+w0 = average_y - w1 * average_x
+
+-------------------------------------------------
+
+Multivariate (Multiple) linear regression:
+------------------------------------------
+input: (x1, x2, x3, x4, x5, ... , xn)
+output: (ya, yb, yc)
+
+ya = wa0 + wa1 x1 + wa2 x2 + wa3 x3 + ... ...+ wap xp
+     ---   ---      ---      ---               ---
+
+yb = wb0 + wb1 x1 + wb2 x2 + wb3 x2 + ... ... + wbp xp
+     ---   ---      ---      ---                ---
+
+
+training:
+
+input:
+x1, x2, x3,  ... ..., xp, ya, yb, yc
+x1, x2, x3,  ... ..., xp, ya, yb, yc
+x1, x2, x3,  ... ..., xp, ya, yb, yc
+x1, x2, x3,  ... ..., xp, ya, yb, yc
+x1, x2, x3,  ... ..., xp, ya, yb, yc
+x1, x2, x3,  ... ..., xp, ya, yb, yc
+x1, x2, x3,  ... ..., xp, ya, yb, yc
+...
+upto nth data
+
+
+Y = [ya yb yc]
+     ya yb yc
+     ya yb yc
+     ya yb yc
+     ya yb yc
+     ya yb yc
+     ya yb yc
+     ......
+     upto nth data
+
+
+X = [x1 x2  x3  ... ... xp]
+     x1 x2  x3  ... ... xp
+     x1 z2  x3  ... ... xp
+     x1 z2  x3  ... ... xp
+     x1 z2  x3  ... ... xp
+     x1 z2  x3  ... ... xp
+     x1 z2  x3  ... ... xp
+     x1 z2  x3  ... ... xp
+     x1 z2  x3  ... ... xp
+     x1 z2  x3  ... ... xp
+     x1 z2  x3  ... ... xp
+     x1 z2  x3  ... ... xp
+     ...
+     upto nth term
+
+ X = [1 x1 x2  x3  ... ... xp]
+      1 x1 x2  x3  ... ... xp
+      1 x1 z2  x3  ... ... xp
+      1 x1 z2  x3  ... ... xp
+      1 x1 z2  x3  ... ... xp
+      1 x1 z2  x3  ... ... xp
+      1 x1 z2  x3  ... ... xp
+      1 x1 z2  x3  ... ... xp
+      1 x1 z2  x3  ... ... xp
+      1 x1 z2  x3  ... ... xp
+      1 x1 z2  x3  ... ... xp
+      1 x1 z2  x3  ... ... xp
+      ...
+      upto nth term
+
+W = [  Wa0  Wb0  Wc0 ]
+       Wa1  Wb1  Wc1
+       Wa2  Wb2  Wc2
+       Wa3  ...  ...
+       Wa4  ...  ...
+       ...  ...  ...
+       Wap  Wbp  Wcp
+
+
+Least Square Error, proof x
+
+W = (X.T * X) -1  * X.T * Y
+
+
+numpy matrix multiplication: A@B
+
+f(.) = theta0+theta1.x1+theta2.x2+... ...+thetan.xn
+
+Simple Linear Regression
+- y = f(x) = theta0+theta1.x1
+
+            theta0 = y_avg - theta1 * x_average
+
+                        Sy
+            theta1 = r ------
+                        Sx
+
+
+Multivariate multiple linear regression
+- y1 = theta10+theta11.x1+theta12.x2+... ...+theta1n.xn
+- y2 = theta20+theta21.x1+theta22.x2+... ...+theta2n.xn
+
+output = (XT.X)-1  .XT.Y
+
+Classification: Logistic regression (binary classification)
+
+[continuous number]
+z
+= f(x1, x2, x3, ... , xn)
+=theta0+theta1.x1+theta2.x2+... ...+thetan.xn
+
+                                        1
+sigmoid function, final output,y = ----------- = probability
+                                    1+e^-z
+
+                output range [0,1]
+
+probability >0.5, class = 1/True
+otherwise, class= 0 /False
+
+---------------------------------------------------
+
+<1,2,3,4,5> * <1,5,7,9,10>
+<1*1  2*5  3*7  4*9  5*10>.sum()
+
+
+input: x1, x2, x3, x4
+z = ϴ0.1 + ϴ1.x1 + ϴ2.x2 + ϴ3.x3 + ϴ4.x4 (training data)
+            1
+output: ----------- , if >0.5 then True/1, else False/0
+         1+ e^-z
+
+
+-------------------
+input: x = 1000 data
+
+training: 800, we will predict the value of Theta
+validation: 100, using the final result of training phase will calculate the accuracy
+test: 100
+
+Logistic regression:
+cost =  -(1/m) [sum_data1_datam ylog(predict) + (1-y)log(1-predicted) ]
+
+Gradient Descent algorithm - theta learn:
+
+theta = theta - slope*learning_rate
+
+
+initially: randomly theta initialize
+
+Gradient Descent(learning_rate=0.1, theta)
+
+    initial_cost = Calculate_cost(theta<ϴ0,ϴ1,ϴ2,ϴ3,ϴ4>, training_data)
+    while/maximum rotate 2000 times:
+
+        for x in training_data:
+            slope = (y-predicted)*x<1,x1,x2,x3,x4> = <val1, val2, val3, val4, val5>
+            next_theta = <ϴ0,ϴ1,ϴ2,ϴ3,ϴ4> - learning_rate*slope
+
+        new_cost = Calculate_cost(new_theta<ϴ0,ϴ1,ϴ2,ϴ3,ϴ4>, training_data)
+        if new_cost>cost:
+            break
+        else:
+            theta=new_theta
+            initial_cost=new_cost
+
+    return theta
+
+
+------------------
+Table:
+---------------------------------------
+learning rate       validation accuracy
+---------------------------------------
+0.001                95%
+0.01                 98%, theta
+0.1                  92%
+
+choose = learning rate, 0.01
+
+using that theta we will test the output.
+
+
+-------------------
+calculate_cost(theta, x):
+
+    sum=0
+    for eachdata in x:
+        y=real class of this data
+
+        Z= (theta*eachdata).sum()
+                    1
+        output = -------
+                  1+e^-z
+
+        if output>0.5:
+            predict=1
+        else:
+            predict=0
+
+        sum+=ylog(predict) + (1-y)log(1-predicted)
+
+    finalcost=sum*(-1/m)
+    return finalcost
+
+-------------------
+KNN = K hyperparameter
+
+------------------
+1. Linear regression
+2. Multivariate (y1 y2 y3)
+        y1=theta10 + theta11.x1+theta12.x2+ ... ... +theta1n.xn
+        y2=theta20 + theta21.x1+theta22.x2+ ... ... +theta2n.xn
+
+        Theta = (XT*X)-1. XT.Y
+
+        X=[
+            [1 2 3 4 5],
+            [1 0.5 2 3 4]
+          ]
+
+         X.T
+         Theta = np.linalg.inv(X.T@X) @ X.T @Y
+
+         [[theta10, theta20, ]
+          [theta11, theta21, ]
+          [theta12, theta22, ]]
+
+
+        Y=[ [2,3,4],
+            [5,6,7]]
+
+3. Logistic regression
+
+
+
+-------------------------------------
+scipy
+---------
+KNN
+NB
+Regression
+Clustering

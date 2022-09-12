@@ -1,0 +1,27 @@
+==============KNN_Classifier_REPORT=====================
+    For k=3, Validation Accuracy=100.0
+    For k=5, Validation Accuracy=100.0
+    For k=7, Validation Accuracy=100.0
+    For k=9, Validation Accuracy=96.0
+    For k=11, Validation Accuracy=96.0
+    For k=13, Validation Accuracy=96.0
+    For k=15, Validation Accuracy=96.0
+
+    From above,The Best value of k = 3
+
+    Now i'm going to calculate the test accuracy for the value of k=3. 
+    Test Accuracy:  95.23809523809523
+
+============KNN_Regression_REPORT=========================== 
+      For k=3, Mean Squard Error=4622.536458333334
+      For k=5, Mean Squard Error=4502.105
+      For k=7, Mean Squard Error=4764.316645408163
+      For k=9, Mean Squard Error=4702.207175925927
+      For k=11, Mean Squard Error=4564.658445247933
+      For k=13, Mean Squard Error=4502.759153106509
+      For k=15, Mean Squard Error=4488.331805555556
+
+      From above,The Lowest value of k = 15
+
+      Now i'm going to calculate the test error for the value of k=15
+      Test Error:  3308.1511746031747
